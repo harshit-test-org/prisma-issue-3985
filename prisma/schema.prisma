@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Payslip {
+  id  String @id @default(uuid())
+  status String
+  publishedAt DateTime?
+  updatedAt DateTime?
+  employeeId  String
+  employee  Employee  @relation(fields: [employeeId], references: [id])
+  paymentDate  DateTime
+  @@unique([employeeId, paymentDate], name: "uniqKeyByEmployeeIdAndPaymentDate")
+}
+
+model Employee {
+  id String @id @default(cuid())
+  name String
+}
