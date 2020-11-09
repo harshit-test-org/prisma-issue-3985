@@ -9,7 +9,7 @@ async function main() {
       AND: [
         { employeeId: { in: [""] } },
         { status: "uploaded" },
-        { paymentDate: new Date().toISOString() },
+        { paymentDate: new Date() },
         { publishedAt: null },
       ],
     },
